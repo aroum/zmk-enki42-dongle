@@ -1,0 +1,106 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#include <dt-bindings/zmk/ext_power.h>
+
+#define DEF 0
+#define LWR 1
+#define RSE 2
+#define ADJ 3
+
+&lt { quick_tap_ms = <220>; };
+&mt { quick_tap_ms = <220>; };
+
+/ {
+    macros {
+        numdot: numdot {
+            label = "ZM_numdot";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings
+                = <&macro_press   &kp LALT>    
+                , <&macro_tap     &kp KP_N4 &kp KP_N6>    
+                , <&macro_release &kp LALT>
+                ;
+        };
+        grtsgn: grtsgn {
+            label = "ZM_grtsgn";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings
+                = <&macro_press   &kp LALT>    
+                , <&macro_tap     &kp KP_N6 &kp KP_N2>    
+                , <&macro_release &kp LALT>
+                ;
+        };
+    };
+};
+/ {
+        keymap {
+                compatible = "zmk,keymap";
+
+                default_layer {
+// ------------------------------------------------------------------------------------------------
+//| LGUI/] |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | RGUI/[ | 
+//| CTRL/` |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  | CTRL/' |
+//| LALT/\ |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | RALT/- |
+//                             | RSE | SPC | LWR |   | LWR | BKSP | RSE |
+                        bindings = <
+  &mt LWIN RBKT   &kp Q &kp W &kp E &kp R &kp T               &kp Y  &kp U  &kp I     &kp O   &kp P    &mt RWIN LBKT 
+  &mt LCTRL GRAVE &kp A &kp S &kp D &kp F &kp G               &kp H  &kp J  &kp K     &kp L   &kp SEMI &mt RCTRL SQT
+  &mt LALT  BSLH  &kp Z &kp X &kp C &kp V &kp B               &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH &mt RALT MINUS
+        &lt RSE TAB &mt LSHFT SPACE &lt LWR RET              &lt LWR ESC &mt RSHFT BSPC &lt RSE DEL
+                        >;
+                };
+                lower_layer {
+// -----------------------------------------------------------------------------------------
+//|LGUI/CAPS |  *  |  7 |  8  |  9  |  +  |    |  !  |  @  |  #  |  $  |  %  | RGUI/F1 |
+//|CTRL/MENU |  /  |  4 |  5  |  6  |  -  |    |  ^  |  &  |  *  |  (  |  )  | CTRL/F2 |
+//|  LALT/=  |  0  |  1 |  4  |  3  |  .  |    |  ls |  F4 |  F5 |  F6 |  F7 | RALT/F3 |
+//                      | ADJ | ___ | ___ |    | ___ | ___ | ADJ |
+                        bindings = <
+ &mt LWIN CAPS   &kp KP_MULTIPLY  &kp N7 &kp N8   &kp N9      &kp PLUS                    &kp EXCL      &kp AT    &kp HASH   &kp DLLR  &kp PRCNT &mt RWIN F1  
+ &mt LCTRL K_APP &kp KP_SLASH     &kp N4 &kp N5   &kp N6      &kp MINUS                   &kp CARET     &kp AMPS  &kp STAR   &kp LPAR  &kp RPAR  &mt RALT F2
+ &mt LALT EQUAL  &kp N0           &kp N1 &kp N2   &kp N3      &numdot                     &kp LG(SPACE) &kp F4    &kp F5     &kp F6    &kp F7    &mt RALT F3
+                                                  &lt ADJ TAB &trans &trans        &trans &trans        &lt ADJ DEL
+                        >;
+                };
+                raise_layer {
+// -----------------------------------------------------------------------------------------
+//| LGUI |  VOLU  |  PGUP  | PLAY | HOME | ___  |            | ___  | HOME | PLAY| PGUP | VOLU | RGUI |
+//| CTRL |  VOLD  |  LEFT  |  UP  | DOWN | RGHT |            | RGHT | DOWN | UP  | LEFT | VOLD | CTRL | 
+//| LALT |  MUTE  |  PGDN  |  ___ | END  | ___  |            | ___  | END  | ___ | PGDN | MUTE | RALT |
+//                          | ___ | ___  | ADJ  |            | ADJ  | ___  | ___ |
+                        bindings = <
+&kp LWIN   &kp C_VOL_UP   &kp PG_UP  &kp C_PP       &kp HOME &kp C_PAUSE                                 &kp N0    &kp HOME  &kp C_PP    &kp PG_UP  &kp C_VOL_UP  &kp RWIN
+&kp LCTRL  &kp C_VOL_DN   &kp LEFT   &kp UP         &kp DOWN &kp RIGHT                                   &kp LEFT  &kp DOWN  &kp UP      &kp RIGHT  &kp C_VOL_DN  &kp RALT 
+&kp LALT   &kp C_MUTE     &kp PG_DN  &kp LG(LS(S))  &kp END  &kp C_PLAY                                  &kp N0    &kp END   &grtsgn      &kp PG_DN  &kp C_MUTE    &kp RALT
+                                                    &trans   &trans       &lt ADJ RET        &lt ADJ ESC &trans &trans
+                        >; 
+                };
+                                adjust_layer {
+// -----------------------------------------------------------------------------------------
+//| BLDR |     |     |     |     |     |   |     |     |     |     |     | BLDR |
+//| BTCLR| BT0 | BT1 | BT2 | BT3 | BT4 |   | BT4 | BT3 | BT2 | BT1 | BT0 | BTCLR|
+//|pwrOFF|NUMLK|     |     |     |     |   |     |     |     |     |     |      |
+//                   |     |     |     |   |     |     |     |
+                        bindings = <
+&bootloader           &none         &none        &none        &none        &none                             &none        &none        &none        &none        &none         &bootloader
+&bt BT_CLR            &bt BT_SEL 0  &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                      &bt BT_SEL 4 &bt BT_SEL 3 &bt BT_SEL 2 &bt BT_SEL 1 &bt BT_SEL 0  &bt BT_CLR
+&ext_power EP_OFF     &kp KP_NUM    &none        &none        &none        &none                             &none        &none        &none        &none        &none         &ext_power EP_OFF 
+                                                              &trans       &none     &trans           &trans &none        &trans
+                        >;
+                };
+        };
+};
