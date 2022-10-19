@@ -19,7 +19,6 @@ config/boards/shields/enki42/enki42.conf
 
 ## Credit
 
-
 * [@slicemk](https://github.com/slicemk) for an original idea
  
 * [@benvallack](https://github.com/benvallack/zmk-config-card) card keyboard config as a reference 
