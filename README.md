@@ -1,6 +1,6 @@
 # ZMK config for corne-like keyboard with dongle
 
-The config allows you to use 3 n!n, one for the dongle, one for the left half, one for the right half. Using a dongle allows you to significantly increase the time of the keyboard, but at the same time you can not switch between different devices as with bluetooth. More details on the [slicemk page](https://www.slicemk.com/pages/split-dongle).
+The config allows you to use 3 n!n, one for the dongle, one for the left half, one for the right half. Using a dongle significantly increases battery life.. More details on the [slicemk page](https://www.slicemk.com/pages/split-dongle).
 
 Config contains [Watchman's layout](https://github.com/aroum/Watchman-layouts).
 
