@@ -6,9 +6,10 @@
 #
 ---
 include:
-  - board: nice_nano_v2
+  - board: nrfmicro_13
     shield: enki42_left
-  - board: nice_nano_v2
+  - board: nrfmicro_13
     shield: enki42_right
-  - board: nice_nano_v2
+  - board: seeeduino_xiao_ble
     shield: enki42_dongle
+
