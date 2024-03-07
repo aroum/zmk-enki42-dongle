@@ -16,7 +16,7 @@ config/boards/shields/enki42/enki42.conf
 ```
 ## Install
 
-Before flashing this firmware, flash the setting reset firmware into all 3 controllers. Then flash this firmware on 3 devices. If the halves do not connect themselves, try pressing the reset buttons on the dongle and keyboards.
+Before flashing this firmware, flash the [setting reset firmware](https://zmk.dev/docs/troubleshooting#split-keyboard-halves-unable-to-pair) into all 3 controllers. Then flash this firmware on 3 devices. If the halves do not connect themselves, try pressing the reset buttons on the dongle and keyboards.
 
 ## Credit
 
