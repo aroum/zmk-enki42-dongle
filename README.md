@@ -2,6 +2,8 @@
 
 This repository provides a custom ZMK configuration for Corne-like wireless keyboards (e.g., Enki42) using a **three-controller dongle architecture**. By offloading the central BLE host role to a dedicated USB dongle, battery efficiency for both keyboard halves is drastically improved.
 
+As a dongle, you can use any board based on the nRF52840 chip—such as an original nice!nano v2 or its clones, a Seeed Studio XIAO BLE, or compact off-the-shelf USB dongles from Holyiot. Using third-party hardware usually requires only minor pin mapping and configuration adjustments for that specific board.
+
 ## Overview & Theoretical Background
 
 ### How ZMK Dongle Architecture Works (BLE)
