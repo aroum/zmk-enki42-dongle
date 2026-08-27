@@ -1,10 +1,10 @@
 manifest:
-  remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
+  remotes:    
+    - name: aroum
+      url-base: https://github.com/aroum
   projects:
     - name: zmk
-      remote: zmkfirmware
+      remote: aroum
       revision: main
       import: app/west.yml
   self:
